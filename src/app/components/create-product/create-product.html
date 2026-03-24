@@ -1,0 +1,23 @@
+<div class="create-container">
+  <a class="back-link" routerLink="/home">← Volver al Home</a>
+  <form (ngSubmit)="saveProduct()" class="create-form" autocomplete="off">
+    <h2>Crear Producto</h2>
+
+    <label>Nombre</label>
+    <input type="text" [(ngModel)]="name" name="name" required />
+
+    <label>Descripción</label>
+    <textarea [(ngModel)]="description" name="description" required></textarea>
+
+    <label>Precio</label>
+    <input type="number" [(ngModel)]="price" name="price" required />
+
+    <label>Stock</label>
+    <input type="number" [(ngModel)]="stock" name="stock" required />
+
+    <label>Imagen</label>
+    <input type="file" (change)="onFileSelected($event)" accept="image/png,image/jpg,image/jpeg" />
+
+    <button type="submit" class="save-btn">Guardar Producto</button>
+  </form>
+</div>

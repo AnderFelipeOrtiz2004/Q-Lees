@@ -1,0 +1,23 @@
+<div class="edit-container">
+  <a class="back-link" routerLink="/home">← Volver al Home</a>
+  <form (ngSubmit)="updateProduct()" class="edit-form" autocomplete="off">
+    <h2>Editar Producto</h2>
+
+    <label>Nombre</label>
+    <input type="text" [(ngModel)]="product.name" name="name" required />
+
+    <label>Descripción</label>
+    <textarea [(ngModel)]="product.description" name="description" required></textarea>
+
+    <label>Precio</label>
+    <input type="number" [(ngModel)]="product.price" name="price" required />
+
+    <label>Stock</label>
+    <input type="number" [(ngModel)]="product.stock" name="stock" required />
+
+    <div class="actions">
+      <button type="submit" class="btn-update">Actualizar Producto</button>
+      <button type="button" class="btn-delete" (click)="deleteProduct()">Eliminar Producto</button>
+    </div>
+  </form>
+</div>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth'; 
+import { AuthService } from '../../services/auth.js'; 
 
 @Component({
   selector: 'app-login',
@@ -23,6 +23,9 @@ export class LoginComponent {
         if (res?.status === true) {
           if (res?.user?.name) {
             localStorage.setItem('user_name', res.user.name);
+          }
+          if (res?.user?.id) {
+            localStorage.setItem('user_id', String(res.user.id));
           }
           if (res?.token) {
             this.authService.saveToken(res.token);
