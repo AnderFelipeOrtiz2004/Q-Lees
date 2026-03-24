@@ -1,0 +1,39 @@
+<div class="dashboard">
+  <nav class="sidebar">
+    <div class="logo">
+      <h2>Q-LESS</h2>
+      <p>SENA CBA</p>
+    </div>
+    <ul class="nav-links">
+      <li><a class="active">Panel Principal</a></li>
+      <li><a>Materiales</a></li>
+      <li><a>Mis Pedidos</a></li>
+      <li><a>Perfil</a></li>
+    </ul>
+    <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+  </nav>
+
+  <main class="content">
+    <header>
+      <h1>Bienvenido, {{ userName }}</h1>
+      <span class="date">Marzo 2026</span>
+    </header>
+
+    <section class="stats">
+      <div class="card">
+        <h3>Pedidos Activos</h3>
+        <p class="number">0</p>
+      </div>
+      <div class="card">
+        <h3>Puntos Acumulados</h3>
+        <p class="number">150</p>
+      </div>
+    </section>
+
+    <section class="quick-actions">
+      <h2>Acciones Rápidas</h2>
+      <button class="action-card">Nueva Solicitud de Material</button>
+      <button class="action-card">Ver Catálogo</button>
+    </section>
+  </main>
+</div>
