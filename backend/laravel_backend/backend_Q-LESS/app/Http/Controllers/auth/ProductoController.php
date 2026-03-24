@@ -9,29 +9,48 @@ class ProductoController extends Controller
 {
     public function index()
     {
-        return Producto::all();
+        return response()->json(Producto::all(), 200);
     }
 
     public function store(Request $request)
     {
-        return Producto::create($request->all());
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'precio' => 'required|numeric',
+            'stock'  => 'required|integer',
+        ]);
+
+        $producto = Producto::create($validated);
+        return response()->json($producto, 201);
     }
 
     public function show($id)
     {
-        return Producto::findOrFail($id);
+        $producto = Producto::find($id);
+        if (!$producto) {
+            return response()->json(['message' => 'Producto no encontrado'], 404);
+        }
+        return response()->json($producto, 200);
     }
 
     public function update(Request $request, $id)
     {
-        $product = Producto::findOrFail($id);
-        $product->update($request->all());
-        return $product;
+        $producto = Producto::find($id);
+        if (!$producto) {
+            return response()->json(['message' => 'Producto no encontrado'], 404);
+        }
+
+        $producto->update($request->all());
+        return response()->json($producto, 200);
     }
 
     public function destroy($id)
     {
-        Product::destroy($id);
-        return response()->json(['message' => 'Producto eliminado']);
+        $deleted = Producto::destroy($id);
+        
+        if ($deleted) {
+            return response()->json(['message' => 'Producto eliminado'], 200);
+        }
+        return response()->json(['message' => 'No se pudo eliminar'], 404);
     }
 }

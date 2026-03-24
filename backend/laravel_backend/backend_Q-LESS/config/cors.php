@@ -3,94 +3,42 @@
 return [
 
     /*
-    |--------------------------------------------------------------------------
-    | Paths
-    |--------------------------------------------------------------------------
-    |
-    | Define qué rutas estarán sujetas a CORS. Normalmente se incluyen las
-    | rutas de la API y las cookies de Sanctum.
-    |
+    | Define qué rutas estarán sujetas a CORS. 
     */
 
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
     /*
-    |--------------------------------------------------------------------------
-    | Allowed Methods
-    |--------------------------------------------------------------------------
-    |
-    | Métodos HTTP permitidos. Puedes poner '*' para permitir todos,
-    | o especificar ['GET', 'POST', 'PUT', 'DELETE'].
-    |
+    | Métodos HTTP permitidos. '*' para permitir todos.
     */
 
     'allowed_methods' => ['*'],
 
     /*
-    |--------------------------------------------------------------------------
-    | Allowed Origins
-    |--------------------------------------------------------------------------
-    |
-    | Define qué dominios pueden hacer peticiones. '*' permite todos.
-    | En producción conviene restringir a tu frontend (ej: http://localhost:3000).
-    |
+    | IMPORTANTE: Especifica el origen de tu Angular.
+    | Esto evita problemas de seguridad y conflictos con credenciales.
     */
 
-    'allowed_origins' => ['*'],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Allowed Origins Patterns
-    |--------------------------------------------------------------------------
-    |
-    | Puedes usar patrones de regex para permitir orígenes dinámicos.
-    |
-    */
+    'allowed_origins' => ['http://localhost:4200'], 
 
     'allowed_origins_patterns' => [],
 
     /*
-    |--------------------------------------------------------------------------
-    | Allowed Headers
-    |--------------------------------------------------------------------------
-    |
-    | Headers permitidos en las solicitudes. '*' permite todos.
-    |
+    | Headers permitidos. Mantén '*' para no tener problemas con 
+    | headers personalizados (como Authorization o Content-Type).
     */
 
     'allowed_headers' => ['*'],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Exposed Headers
-    |--------------------------------------------------------------------------
-    |
-    | Headers que estarán disponibles para el navegador.
-    |
-    */
-
     'exposed_headers' => [],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Max Age
-    |--------------------------------------------------------------------------
-    |
-    | Tiempo en segundos que el navegador puede cachear la respuesta de preflight.
-    |
-    */
 
     'max_age' => 0,
 
     /*
-    |--------------------------------------------------------------------------
-    | Supports Credentials
-    |--------------------------------------------------------------------------
-    |
-    | Si tu API necesita enviar cookies o credenciales, ponlo en true.
-    |
+    | Si vas a usar Login, Registro o Sanctum, esto DEBE estar en true.
+    | Permite que Angular envíe cookies o tokens de sesión.
     */
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];
