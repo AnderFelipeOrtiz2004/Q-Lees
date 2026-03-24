@@ -1,56 +1,59 @@
-# Q-Less - Papelería Virtual SENA
+# Frontend
 
-Plataforma de gestión para la provisión de suministros académicos orientada a la comunidad SENA a nivel nacional. El sistema permite la interacción entre aprendices e instructores para la solicitud y control de inventarios de papelería en los centros de formación.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.1.
 
-## Información del Proyecto
+## Development server
 
-Este proyecto ha sido desarrollado utilizando **Angular CLI versión 21.2.1**.
-
-### Características principales
-* Acceso segmentado para Instructores y Aprendices.
-* Gestión de solicitudes a nivel nacional.
-* Control de inventario en tiempo real.
-* Reducción de tiempos de espera en procesos físicos.
-
-## Guía de Desarrollo
-
-### Servidor de desarrollo
-Para iniciar un servidor de desarrollo local, ejecute:
+To start a local development server, run:
 
 ```bash
 ng serve
-Una vez que el servidor esté en funcionamiento, abra su navegador en http://localhost:4200/. La aplicación se recargará automáticamente cada vez que modifique los archivos fuente.
+```
 
-Generación de código
-Para generar un nuevo componente, ejecute:
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-Bash
-ng generate component nombre-del-componente
-Para obtener una lista completa de esquemas disponibles (como componentes, directivas o pipes), ejecute ng generate --help.
+## Code scaffolding
 
-Construcción (Build)
-Para compilar el proyecto, ejecute:
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-Bash
+```bash
+ng generate component component-name
+```
+
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+
+```bash
+ng generate --help
+```
+
+## Building
+
+To build the project run:
+
+```bash
 ng build
-Esto almacenará los artefactos de compilación en el directorio dist/. Por defecto, la compilación de producción optimiza la aplicación para rendimiento y velocidad.
+```
 
-Pruebas y Calidad
-Pruebas unitarias
-Para ejecutar pruebas unitarias con el corredor de pruebas Vitest, utilice:
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-Bash
+## Running unit tests
+
+To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+
+```bash
 ng test
-Pruebas de extremo a extremo (e2e)
-Para ejecutar pruebas e2e, utilice:
+```
 
-Bash
+## Running end-to-end tests
+
+For end-to-end (e2e) testing, run:
+
+```bash
 ng e2e
-Colaboradores
-Anderson Felipe Ortiz
+```
 
-Cristian Dario Rojas
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
-Daniel Andres Cubidez
+## Additional Resources
 
-Centro de Biotecnología Agropecuaria (CBA) - Mosquera. Programa: Análisis y Desarrollo de Software.
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
