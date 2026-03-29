@@ -1,0 +1,58 @@
+<div class="home-wrapper">
+  <header class="main-header">
+    <div class="brand">
+      <h1>Q-LESS</h1>
+    </div>
+    <nav class="main-nav">
+      <a routerLink="/home">Inicio</a>
+      <a routerLink="/productos">Productos</a>
+      <a href="#">Blog</a>
+    </nav>
+    <div class="top-actions">
+      <input type="search" placeholder="Buscar productos..." [(ngModel)]="searchText" />
+      <a class="btn-create" routerLink="/nuevo-producto">+ Crear Producto</a>
+      <button class="btn-logout" (click)="logout()">Cerrar Sesión</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h2>Bienvenido, {{ userName }}</h2>
+    <p>Administra tus productos desde un panel moderno y rápido.</p>
+  </section>
+
+  <main class="content-section">
+    <aside class="sidebar-colecciones">
+      <h3>Colección</h3>
+      <div class="collection-list">
+        <a href="#" class="collection-item">Cuadernos y libretas</a>
+        <a href="#" class="collection-item">Lápices y marcadores</a>
+        <a href="#" class="collection-item">Cartulinas y hojas</a>
+        <a href="#" class="collection-item">Materiales...</a>
+      </div>
+    </aside>
+
+    <section class="productos-section">
+      <h2 class="section-title">Productos favoritos</h2>
+      
+      <div *ngIf="filteredProducts.length > 0" class="products-grid">
+        <div *ngFor="let p of filteredProducts" class="product-card">
+          <div class="product-image">
+            <img [src]="getImageUrl(p)" (error)="onImageError($event)" alt="{{ p.nombre }}" />
+          </div>
+          <div class="product-body">
+            <h4 class="product-name">{{ p.nombre }}</h4>
+            <p class="product-price">{{ p.precio }} Pesos</p>
+            <div class="product-actions">
+              <button class="btn-edit" [routerLink]="['/editar-producto', p.id]">Editar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="filteredProducts.length === 0" class="empty-state">
+        <p *ngIf="searchText.trim().length > 0">No se encontraron productos para "{{ searchText }}"</p>
+        <p *ngIf="searchText.trim().length === 0">No hay productos de momento. Crea el primero.</p>
+      </div>
+    </section>
+  </main>
+</div>   

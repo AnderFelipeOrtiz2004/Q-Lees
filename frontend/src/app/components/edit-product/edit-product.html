@@ -1,0 +1,88 @@
+<div class="edit-wrapper">
+  <header class="main-header">
+    <div class="brand">
+      <h1>Q-LESS</h1>
+    </div>
+    <nav class="main-nav">
+      <a routerLink="/home">Inicio</a>
+      <a routerLink="/productos">Productos</a>
+      <a href="#">Blog</a>
+    </nav>
+    <div class="top-actions">
+      <button class="btn-logout" (click)="goHome()">Cerrar Sesión</button>
+    </div>
+  </header>
+
+  <main class="edit-content">
+    <form (ngSubmit)="updateProduct()" class="edit-form" autocomplete="off">
+      <h2 class="form-title">Editar Producto</h2>
+
+      <div *ngIf="errors.length > 0" class="alerts-container">
+        <div *ngFor="let alert of errors" [ngClass]="'alert alert-' + alert.type" role="alert">
+          {{ alert.message }}
+        </div>
+      </div>
+
+      <div *ngIf="successMessage" class="alert alert-success" role="alert">
+        {{ successMessage }}
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre de producto</label>
+          <input type="text" [(ngModel)]="product.nombre" name="nombre" required [disabled]="isLoading" />
+        </div>
+        <div class="form-group">
+          <label>Categoría</label>
+          <input type="text" placeholder="Ej: Cuadernos" name="category" [disabled]="isLoading" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Precio del producto</label>
+          <input type="number" [(ngModel)]="product.precio" name="precio" placeholder="$0.00" required [disabled]="isLoading" />
+        </div>
+        <div class="form-group">
+          <label>Cantidad de producto en stock</label>
+          <input type="number" [(ngModel)]="product.stock" name="stock" placeholder="0" required [disabled]="isLoading" />
+        </div>
+      </div>
+
+      <div class="form-group full-width">
+        <label>Descripcion del producto</label>
+        <textarea [(ngModel)]="product.descripcion" name="descripcion" placeholder="Describe tu producto..." required [disabled]="isLoading"></textarea>
+      </div>
+
+      <div class="form-group full-width">
+        <label>Imagenes del producto</label>
+        <div class="image-upload-section">
+          <input type="file" (change)="onFilesSelected($event)" accept="image/png,image/jpg,image/jpeg" [disabled]="isLoading" style="display: none;" #fileInput multiple />
+          <div class="image-placeholders">
+            <div class="image-placeholder" (click)="fileInput.click()">
+              <img *ngIf="product.image_path" [src]="product.image_path" alt="Imagen actual" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;" />
+              <span *ngIf="!product.image_path">+</span>
+              <button *ngIf="product.image_path" type="button" class="btn-remove-image" (click)="removeCurrentImage(); $event.stopPropagation();">✕</button>
+            </div>
+            <div *ngFor="let preview of previewUrls; let i = index" class="image-placeholder">
+              <img [src]="preview" alt="Nueva imagen" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;" />
+              <button type="button" class="btn-remove-image" (click)="removeSelectedImage(i); $event.stopPropagation();">✕</button>
+            </div>
+            <div *ngFor="let _ of [].constructor(5 - (previewUrls.length + (product.image_path ? 1 : 0)))" class="image-placeholder-empty"></div>
+          </div>
+          <small class="text-muted">Formatos: PNG, JPG, JPEG (máx. 5MB)</small>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" routerLink="/home">Cancelar</button>
+        <button type="submit" class="btn-update" [disabled]="isLoading">
+          {{ isLoading ? 'Guardando...' : 'Actualizar_Producto' }}
+        </button>
+        <button type="button" class="btn-delete" (click)="deleteProduct()" [disabled]="isLoading">
+          Eliminar_Producto
+        </button>
+      </div>
+    </form>
+  </main>
+</div>

@@ -8,35 +8,37 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
-
     public function login(Request $request)
     {
+        // 1. Validamos los datos que vienen de Angular/Thunder Client
         $credentials = $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
 
+        // 2. Intentamos iniciar sesión
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/')->with('success', 'Has iniciado sesión correctamente');
+            $user = Auth::user();
+            
+            // 3. Devolvemos JSON (Esto es lo que Angular necesita para ir al Home)
+            return response()->json([
+                'status' => true,
+                'message' => '¡Bienvenido a Q-LESS!',
+                'user' => $user,
+                'redirect' => '/home' 
+            ], 200);
         }
 
-        return back()->withErrors([
-            'email' => 'Las credenciales no coinciden con nuestros registros.',
-        ])->onlyInput('email');
+        // 4. Si falla, devolvemos error en JSON
+        return response()->json([
+            'status' => false,
+            'message' => 'Las credenciales no coinciden con nuestros registros.'
+        ], 401);
     }
 
     public function logout(Request $request)
     {
         Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/login')->with('success', 'Has cerrado sesión correctamente');
+        return response()->json(['message' => 'Sesión cerrada']);
     }
 }
